@@ -1,0 +1,1 @@
+web: gunicorn ocptechtrack_website.wsgi

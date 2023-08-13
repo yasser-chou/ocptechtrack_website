@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+import django_heroku
+import dj_database_url
+from decouple import config
 
 from ms_identity_web.configuration import AADConfig
 from ms_identity_web import IdentityWebPython
@@ -39,7 +42,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 MIDDLEWARE.append('ms_identity_web.django.middleware.MsalMiddleware')
 
@@ -101,6 +104,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -117,5 +122,5 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_REDIRECT_URL = 'list_tickets' 
 
 
-
+django_heroku.settings(locals())
 
