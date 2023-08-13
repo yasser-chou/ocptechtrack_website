@@ -1,0 +1,95 @@
+{% load static %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css">
+
+<style>
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.uploaded-image {
+  max-width: 200px;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  width: 30%; 
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+}
+</style>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow p-4">
+        <h2 class="card-title text-center mb-4">Register</h2>
+        <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+          {% csrf_token %}
+          <div class="form-group">
+            {% for field in form %}
+              {% if field.name != 'site' %}
+                <div class="mb-3">
+                  <label for="{{ field.id_for_label }}" class="form-label">
+                    <strong class="form-label-text">{{ field.label }}</strong>
+                  </label>
+                  {% if field.field.widget.input_type == 'file' %}
+                    {{ field }}
+                  {% else %}
+                    <input type="{{ field.field.widget.input_type }}" class="form-control mb-3" name="{{ field.html_name }}" placeholder="{{ field.label }}">
+                  {% endif %}
+                </div>
+              {% else %}
+                <div class="mb-3">
+                  <label for="{{ field.id_for_label }}" class="form-label">
+                    <strong class="form-label-text">{{ field.label }}</strong>
+                  </label>
+                  {{ field }}
+                </div>
+              {% endif %}
+              {% if field.field.widget.input_type == 'file' and field.value %}
+                <img src="{{ field.value.url }}" class="uploaded-image" alt="Uploaded Image">
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          {{form.errors}}
+          <div class="login-link">
+            <p>Already have an account? <a href="{%url 'login'%}">Login</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

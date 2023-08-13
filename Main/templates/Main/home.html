@@ -1,0 +1,84 @@
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background-image: url("{% static 'ocptechtrack/tech.jpg' %}");
+        background-size: cover;
+        background-position: center center;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        text-align: center;
+        color: #ffffff; /* Text color for the white background */
+    }
+
+    .logo {
+        max-width: 250px;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #000000; /* Text color for the black background */
+    }
+
+    .description {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #000000; /* Text color for the black background */
+    }
+
+    .login-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .login-button:hover {
+        background-color: #0056b3;
+    }
+
+    .center-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+</style>
+
+<div class="container center-content">
+    <img src="{% static 'ocptechtrack/ocp1.png' %}" alt="Logo" class="logo">
+    <div class="title">Welcome to ocptechtrack</div>
+    <div class="description">
+        Your premier destination for streamlined ticket management 
+    </div>
+    {% if request.identity_context_data.authenticated %}
+        <!-- If authenticated, no need for login button, just redirect -->
+        <script>
+            // JavaScript code to redirect to the list_tickets page after signing in
+            window.location.href = "{% url 'list_tickets' %}";
+        </script>
+    {% else %}
+        <!-- If not authenticated, display the login button -->
+        <a href="{% url 'sign_in' %}" class="login-button">Login</a>
+    {% endif %}
+</div>
+
+</div>
+{% endblock %}

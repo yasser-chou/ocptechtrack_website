@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket: {{ ticket.title }}</title>
+    <style>
+        /* Add any custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .ticket-info {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .ticket-details {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ticket Details</h1>
+    <div class="ticket-info">
+        <p><strong>Title:</strong> {{ ticket.title }}</p>
+        <p><strong>Ticket Date:</strong> {{ ticket.ticket_date }}</p>
+        <p><strong>Employee:</strong> {{ ticket.employe }}</p>
+        <p><strong>Employee Email:</strong> {{ ticket.employe.email_address }}</p>
+        <p><strong>Employee Telephone:</strong> {{ ticket.employe.telephone }}</p>
+        <p><strong>Employee Department:</strong> {{ ticket.employe.department }}</p>
+        <p><strong>Material:</strong> {{ ticket.material }}</p>
+        <p><strong>Description:</strong> {{ ticket.description }}</p>
+        <p><strong>Solution:</strong> {{ ticket.solution }}</p>
+        <p><strong>Status:</strong> {{ ticket.status }}</p>
+    </div>
+
+    <h2>Additional Details</h2>
+    <div class="ticket-details">
+        <!-- Add any additional details or sections here -->
+    </div>
+</body>
+</html>

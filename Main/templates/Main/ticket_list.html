@@ -1,0 +1,211 @@
+{% extends 'Main/base.html' %}
+{%load static%}
+{% block content %}
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-12">
+      <div class="card ticket-card">
+        <div class="card-body">
+          <h3 class="card-title ticket-title">List of Tickets</h3>
+          <div class="btn-group mb-3" role="group" aria-label="Ticket Actions">
+            <a class="btn btn-primary btn-sm custom-btn me-2" href="{% url 'Employe_form' %}">Add Employee</a>
+            <a class="btn btn-primary btn-sm custom-btn" href="{% url 'Ticket_form' %}">Create Ticket</a>
+          </div>
+          <div class="my-form mb-3 ps-3 pe-3">
+            <form method="get">
+              <div class="form-row">
+                  <div class="input-group">
+                      {{ myFilter.form.full_name.label_tag }}
+                      {{ myFilter.form.full_name }}
+                  </div>
+          
+                  <div class="input-group">
+                      {{ myFilter.form.employe__site.label_tag }}
+                      {{ myFilter.form.employe__site }}
+                  </div>
+          
+                  <div class="input-group">
+                      {{ myFilter.form.start_date.label_tag }}
+                      {{ myFilter.form.start_date }}
+                  </div>
+          
+                  <div class="input-group">
+                      {{ myFilter.form.end_date.label_tag }}
+                      <input type="date" name="todate"/>
+                  </div>
+         
+
+                  <div class="input-group">
+                      <button class="btn btn-primary btn-sm custom-btn ticket-search-button" type="submit">Search</button>
+                  </div>
+              </div>
+          </form>
+          </div>
+          
+          
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover ticket-table">
+            <thead class="thead-light">
+    <tr>
+        <th>Matricule</th>
+        <th>Employee</th>
+        <th>Title</th>
+        <th>Site</th>
+        <th>Date</th>
+        <th>Material</th>
+        <th>Status</th>
+        <th>Details</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+</thead>
+<tbody>
+    {% for Ticket in list_tickets %}
+    <tr>
+        <td>{{ Ticket.employe.matricule }}</td>
+        <td>{{ Ticket.employe }}</td>
+        <td>{{ Ticket.title }}</td>
+        <td>{{ Ticket.employe.site }}</td>
+        <td>{{ Ticket.ticket_date }}</td>
+        <td>{{ Ticket.material }}</td>
+
+        <td>
+            {% if Ticket.status == 'in progress' %}
+            <span class="badge badge-warning">{{ Ticket.status }}</span>
+            {% elif Ticket.status == 'completed' %}
+            <span class="badge badge-success">{{ Ticket.status }}</span>
+            {% elif Ticket.status == 'pending' %}
+            <span class="badge badge-danger">{{ Ticket.status }}</span>
+            {% else %}
+            <span class="badge badge-primary">{{ Ticket.status }}</span>
+            {% endif %}
+        </td>
+
+        <td>
+            <a href="{% url 'ticket_detail' Ticket.id %}" class="btn btn-outline-secondary btn-sm custom-button" style="color: blue; border-color: blue; border-radius: 10px;">View</a>
+        </td>
+        <td>
+            <a href="{% url 'update_ticket' Ticket.id %}" class="btn btn-outline-secondary btn-sm custom-button" style="color: green; border-color: green; border-radius: 10px;">Update</a>
+        </td>
+        <td>
+            <a href="{% url 'Delete_Ticket' Ticket.id %}" class="btn btn-outline-secondary btn-sm custom-button" style="color: red; border-color: red; border-radius: 10px;">Delete</a>
+        </td>
+
+    </tr>
+    {% endfor %}
+</tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  body {
+    background-color: #f1f1f1;
+  }
+  .input-group {
+    margin-bottom: 15px; /* Add space between field groups */
+}
+
+.custom-btn {
+    padding: 10px 20px; /* Adjust padding to make the button slightly bigger */
+    font-size: 16px; /* Adjust font size for the button text */
+}
+
+/* Display form fields in a horizontal layout with equal spacing */
+.form-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Allow the fields to wrap to the next line when the container is too narrow */
+}
+
+.form-row .input-group {
+    flex: 1; /* Make each field take equal space */
+    margin-right: 15px; /* Add space between fields */
+}
+
+/* Style the form labels to make them bold */
+label {
+    font-weight: bold;
+}
+  .ticket-card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .ticket-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5rem;
+  }
+
+  .my-form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .ticket-search-button {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+
+  .ticket-table {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .ticket-table thead th {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #f8f9fa;
+    color: #333;
+    border: none;
+  }
+
+  .ticket-table tbody td {
+    font-size: 14px;
+    color: #555;
+    vertical-align: middle;
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .badge-warning {
+    background-color: #ffc107;
+    color: #333;
+  }
+
+  .badge-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .badge-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .badge-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+</style>
+
+{% endblock %}

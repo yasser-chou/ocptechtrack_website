@@ -1,0 +1,72 @@
+{% extends 'Main/base.html' %}
+{%load static%}
+{% block content %}
+  <style>
+    body {
+      background-image: url("{% static 'ocptechtrack/tech2.jpg' %}");
+      background-size: cover;
+  
+  }
+    .profile-card {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+
+    .profile-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .profile-email {
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .profile-details {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .profile-details li {
+      margin-bottom: 10px;
+    }
+  </style>
+
+  <h1>List of Employees:</h1>
+  <br>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for Employe in Employe_list %}
+      <div class="col">
+        <div class="profile-card">
+          {% if Employe.profile_pic %}
+            <img src="{{ Employe.profile_pic.url }}" class="profile-image" alt="Profile Image">
+          {% endif %}
+          <h2 class="profile-name">{{ Employe.nom }} {{ Employe.prenom }}</h2>
+          <p class="profile-email"><strong>Email :</strong> {{ Employe.email_address }}</p>
+          <ul class="profile-details">
+            <li><strong>Department :</strong> {{ Employe.department }}</li>
+          </ul>
+          <ul class="profile-details">
+            <li><strong>Site :</strong> {{ Employe.site }}</li>
+          </ul>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+
+{% endblock %}

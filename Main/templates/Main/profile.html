@@ -1,0 +1,47 @@
+{% extends 'Main/base.html' %}
+{% block content %}
+<style>
+  .profile-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .Site {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+
+</style>
+
+<div class="profile-container">
+  {% for Tech in profile %}
+    {% if Tech.profile_image %}
+      <img src="{{ Tech.profile_image.url }}" class="profile-image">
+    {% endif %}
+    <h2 class="profile-name">{{ Tech.first_name }} {{ Tech.last_name }}</h2>
+    <p class="Site">Email : {{ Tech.email_address }}</p>
+    <p class="Site">Site : {{ Tech.site }}</p>
+  {% endfor %}
+</div>
+{% endblock %}

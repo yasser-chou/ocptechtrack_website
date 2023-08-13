@@ -1,0 +1,98 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f7f7;
+        }
+
+        .user_card {
+            width: 400px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .user_card h3 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            color: #333333;
+        }
+
+        .btn-primary {
+            background-color: #33ccff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #1f9eda;
+        }
+
+        .btn-primary:focus {
+            box-shadow: none;
+        }
+
+        .input-group-prepend span {
+            background-color: #f7ba5b;
+            color: white;
+            border: none;
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+
+        .input-group-text {
+            background-color: #f7ba5b;
+            color: white;
+            border: none;
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                <div class="user_card">
+                    <h3>Log In to your account!</h3>
+                    <form method="post" action="{% url 'signin' %}" class="mb-2">
+                        {% csrf_token %}
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Enter Your Username" required>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" id="pass1" name="pass1"
+                                placeholder="Enter Your Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html> {% endcomment %}

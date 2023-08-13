@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ ticket.title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card ticket-card">
+                    <div class="card-body">
+                        <h1 class="card-title ticket-title mb-4">Title: {{ ticket.title }}</h1>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Ticket Date</th>
+                                        <td>{{ ticket.ticket_date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee</th>
+                                        <td>{{ ticket.employe }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Email</th>
+                                        <td>{{ ticket.employe.email_address }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Telephone</th>
+                                        <td>{{ ticket.employe.telephone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Employee Department</th>
+                                        <td>{{ ticket.employe.department }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Material</th>
+                                        <td>{{ ticket.material }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Description</th>
+                                        <td>{{ ticket.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Solution</th>
+                                        <td>{{ ticket.solution }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td>{{ ticket.status }}</td>
+                                    </tr>
+                                    {% if ticket.status == 'completed' %}
+                                    <tr>
+                                        <th>Completed Date</th>
+                                        <td>{{ ticket.completed_at}}</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            <div class="text-center mt-4">
+                                <a href="{% url 'export_ticket_xls' ticket.id %}" class="btn btn-primary">Download XLS</a>
+                                <a href="{% url 'download_ticket_as_pdf' ticket.id %}" class="btn btn-primary">Download PDF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .ticket-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 50px; /* Adjust the top margin for vertical positioning */
+        }
+
+        .ticket-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #007bff; /* Replace with your desired title color */
+            text-align: center; /* Center the title */
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f7f7f7;
+        }
+
+        /* Additional CSS for styling */
+
+        /* Center the card horizontally */
+        .ticket-card {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Add some padding to the container */
+        .container {
+            padding: 20px;
+        }
+
+        /* Style the download buttons */
+        .btn-primary {
+            margin: 10px;
+        }
+    </style>
+</body>
+</html>

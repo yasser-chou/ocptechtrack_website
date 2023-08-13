@@ -1,0 +1,74 @@
+
+{% block content %}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: lightgreen;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: red;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #cc0000;
+    }
+</style>
+
+<div class="container">
+    <p>Are you sure you want to delete "{{ item }}"?</p>
+
+    <form action="{% url 'Delete_Ticket' item.id %}" method="POST">
+        {% csrf_token %}
+        <a href="{% url 'list_tickets' %}">Cancel</a>
+        <input type="submit" value="Confirm">
+    </form>
+</div>
+
+{% endblock %}
