@@ -1,1 +1,2 @@
 # ocptechtrack_website
+the concept of the app revolve around ticket management for an issue tracking or helpdesk system where techniciens can create new tickets to report problems and view and manage these tickets. The app could be useful in various scenarios, such as customer support,IT helpdesk, or project management, where keeping track of tickets and their statuses is essential for efficient problem resolution and communication.
